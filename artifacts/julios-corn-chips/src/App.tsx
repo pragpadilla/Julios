@@ -221,7 +221,7 @@ function WhereToBuy() {
       <div className="nav-wrap">
         <nav className="nav" aria-label="Main navigation">
           <Link className="brand" href="/" aria-label="Julio's Corn Chips home">
-            <span className="brand-mark"><CornMark /></span>
+            <img className="brand-mark" src={img('bag-mark.png')} alt="" />
             <span className="brand-name">Julio’s<small>Corn Chips · Del Rio, TX</small></span>
           </Link>
           <Link className="back-home" href="/">Back to the table <ArrowRight size={15} /></Link>
@@ -280,16 +280,13 @@ function WhereToBuy() {
       </main>
       <footer className="footer">
         <div className="footer-inner">
-          <Link className="brand" href="/"><span className="brand-mark"><CornMark /></span><span className="brand-name">Julio’s<small>Corn Chips · Del Rio, TX</small></span></Link>
+          <Link className="brand" href="/"><img className="brand-mark" src={img('bag-mark.png')} alt="" /><span className="brand-name">Julio’s<small>Corn Chips · Del Rio, TX</small></span></Link>
           <span className="footer-note">Family flavor since the very beginning.</span>
           <div className="footer-links"><Link href="/">Home</Link><a href="tel:18443518805">Call us</a><a href="mailto:sqfpractitioner@julioscornchips.com">Email</a><a href="https://julioscornchips.com/shop/ols/products" target="_blank" rel="noreferrer">Shop <ArrowUpRight size={12} /></a></div>
         </div>
       </footer>
     </div>
   );
-}
-function CornMark() {
-  return <svg viewBox="0 0 28 32" fill="none" aria-hidden="true"><path d="M14 2C7.9 6.2 6 12.5 8 21c1 4.3 3.4 7 6 9 2.6-2 5-4.7 6-9 2-8.5.1-14.8-6-19Z" fill="#a6402d" stroke="#38231c" strokeWidth="1.2"/><path d="M14 5v22M10 10l4 3m4-3-4 3m-5 3 5 3m5-3-5 3m-4 3 4 2m4-2-4 2" stroke="#f5f0d8" strokeWidth="1.1" strokeLinecap="round"/></svg>;
 }
 
 function ChipIllustration({ className = '' }: { className?: string }) {
