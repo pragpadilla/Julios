@@ -13,7 +13,8 @@ if (!rawPort) {
   );
 }
 
-const port = Number(rawPort);
+const port = Number(process.env.PORT ?? 3000);
+const basePath = process.env.BASE_PATH ?? "/";
 
 if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
