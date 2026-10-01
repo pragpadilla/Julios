@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Julio’s Corn Chips"
+description = "A welcoming consumer website for Julio’s Corn Chips, sharing the family story, exploring chips, salsa, and seasoning, and helping customers get in touch about orders and where to buy."
+version = "1.0.0"
+id = "artifacts/julios-corn-chips"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22776
+
+[services.development]
+run = "pnpm --filter @workspace/julios-corn-chips run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/julios-corn-chips", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/julios-corn-chips/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22776"
+BASE_PATH = "/"
