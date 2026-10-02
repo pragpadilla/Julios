@@ -13,14 +13,12 @@ if (!rawPort) {
   );
 }
 
-const port = Number(process.env.PORT ?? 3000);
-const basePath = process.env.BASE_PATH ?? "/";
+const port = Number(rawPort);
+const basePath = process.env.BASE_PATH;
 
 if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
-
-const basePath = process.env.BASE_PATH;
 
 if (!basePath) {
   throw new Error(
@@ -51,12 +49,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(import.meta.dirname, 'src'),
-      '@assets': path.resolve(
-        import.meta.dirname,
-        '..',
-        '..',
-        'attached_assets',
-      ),
     },
     dedupe: ['react', 'react-dom'],
   },

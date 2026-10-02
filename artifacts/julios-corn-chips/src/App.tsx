@@ -1,8 +1,5 @@
 import { type FormEvent, type ReactNode, useEffect, useState } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
-import { Toaster } from '@/components/ui/toaster';
-import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
 import { ArrowDown, ArrowRight, ArrowUpRight, Flame, Leaf, Mail, MapPin, Menu, Phone, Search, Sparkles, X } from 'lucide-react';
 import {
@@ -13,7 +10,6 @@ import {
   Router as WouterRouter,
 } from 'wouter';
 
-const queryClient = new QueryClient();
 const img = (name: string) => `${import.meta.env.BASE_URL}images/${name}`;
 
 function Home() {
@@ -289,51 +285,6 @@ function WhereToBuy() {
   );
 }
 
-function ChipIllustration({ className = '' }: { className?: string }) {
-  return <svg className={className} viewBox="0 0 300 270" fill="none" aria-hidden="true">
-    <path d="M49 154c10-44 37-83 77-99 40-16 85-6 111 23 25 29 29 73 14 109-16 38-53 60-97 63-42 2-86-17-102-50-7-14-8-30-3-46Z" fill="#f5d875" stroke="#38231c" strokeWidth="3"/>
-    <path d="M62 148c11-34 33-63 66-76 34-14 71-6 91 19 20 24 22 58 9 88-14 31-45 49-81 52-35 2-71-13-86-39-8-13-7-29 1-44Z" fill="#d3932c" stroke="#38231c" strokeWidth="2"/>
-    <path d="m82 132 36-74 41 19-38 78-39-23Z" fill="#efc65c" stroke="#38231c" strokeWidth="2.5"/>
-    <path d="m112 93 25 12m-35 1 28 13m-39 2 26 12" stroke="#a75d22" strokeWidth="2" strokeLinecap="round"/>
-    <path d="m130 154 34-82 43 18-38 85-39-21Z" fill="#f2d16d" stroke="#38231c" strokeWidth="2.5"/>
-    <path d="m158 107 27 11m-35 3 28 13m-39 1 27 14" stroke="#a75d22" strokeWidth="2" strokeLinecap="round"/>
-    <path d="m171 169 28-74 40 19-33 78-35-23Z" fill="#e8b84a" stroke="#38231c" strokeWidth="2.5"/>
-    <path d="m197 123 25 12m-31 3 27 12" stroke="#a75d22" strokeWidth="2" strokeLinecap="round"/>
-    <path d="m72 160 40-61 36 23-44 68-32-30Z" fill="#f7d66c" stroke="#38231c" strokeWidth="2.5"/>
-    <path d="m98 124 23 14m-31 0 24 15" stroke="#a75d22" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M42 207c33 32 78 45 123 40 35-4 65-19 86-44-30 23-64 34-100 34-43 0-80-12-109-30Z" fill="#a6402d" stroke="#38231c" strokeWidth="3"/>
-    <path d="M57 205c36 22 72 31 108 29 30-1 57-9 82-24" stroke="#f2d16d" strokeWidth="2"/>
-    <path d="m100 147 4 2m44-55 4 3m49 63 4 2m-88 36 4 2m63-57 4 2m-34 33 4 2" stroke="#48623a" strokeWidth="3" strokeLinecap="round"/>
-  </svg>;
-}
-
-function ChipBowl() {
-  return <svg className="chip-illustration" viewBox="0 0 520 430" fill="none" aria-hidden="true">
-    <ellipse cx="260" cy="354" rx="179" ry="24" fill="#7e4b1c" opacity=".14"/>
-    <path d="M121 249c9 70 45 115 139 115s130-45 139-115H121Z" fill="#a6402d" stroke="#38231c" strokeWidth="4"/>
-    <path d="M139 267c20 47 57 73 121 73s101-26 121-73" stroke="#e98e57" strokeWidth="3"/>
-    <path d="M121 247c0-19 62-34 139-34s139 15 139 34-62 35-139 35-139-16-139-35Z" fill="#f8e8b1" stroke="#38231c" strokeWidth="4"/>
-    <path d="m159 226 30-101 56 20-37 98-49-17Z" fill="#efc65c" stroke="#38231c" strokeWidth="3"/>
-    <path d="m193 205 34-115 59 19-38 113-55-17Z" fill="#f6d976" stroke="#38231c" strokeWidth="3"/>
-    <path d="m251 216 26-104 57 17-31 103-52-16Z" fill="#e8b84a" stroke="#38231c" strokeWidth="3"/>
-    <path d="m297 228 35-97 54 23-43 91-46-17Z" fill="#f3cf66" stroke="#38231c" strokeWidth="3"/>
-    <path d="m218 143 27 11m-37 8 27 11m-36 8 27 11m62-61 24 8m-31 11 25 8m-31 11 24 8m79 6 23 10m-32 3 24 10m-200 7 22 8" stroke="#a75d22" strokeWidth="2.5" strokeLinecap="round"/>
-    <path d="m179 193 4 2m64-93 4 2m64 34 4 2m44 53 4 2m-104-14 4 2" stroke="#48623a" strokeWidth="4" strokeLinecap="round"/>
-    <path d="M111 248c24 19 77 31 149 31s125-12 149-31" stroke="#38231c" strokeWidth="3"/>
-    <path d="M109 248c28-23 82-34 151-34s123 11 151 34" stroke="#38231c" strokeWidth="4"/>
-    <path d="M94 76c13-12 28-18 44-17m245 59c14 5 25 16 29 29M95 164c-9 8-14 18-15 30" stroke="#a6402d" strokeWidth="3" strokeLinecap="round"/>
-    <path d="m133 49 5-12m248 109 12-2M77 211l-12 5" stroke="#48623a" strokeWidth="3" strokeLinecap="round"/>
-  </svg>;
-}
-
-function SalsaIllustration() {
-  return <svg viewBox="0 0 160 190" fill="none" aria-hidden="true"><path d="M35 51h90l-8 112c-1 11-9 18-20 18H63c-11 0-19-7-20-18L35 51Z" fill="#e8d6a1" stroke="#38231c" strokeWidth="3"/><path d="M40 67h80l-6 89c-.7 8-6 12-14 12H60c-8 0-13-4-14-12l-6-89Z" fill="#a6402d"/><path d="M33 42c0-5 4-9 9-9h76c5 0 9 4 9 9v12H33V42Z" fill="#48623a" stroke="#38231c" strokeWidth="3"/><path d="M60 101c12-9 28-9 40 0m-43 25c19-9 35-8 51 1" stroke="#edc948" strokeWidth="3" strokeLinecap="round"/><path d="M78 110c4-7 12-8 17-3 3 4 2 10-1 14l-8 10-8-10c-3-4-3-8 0-11Z" fill="#edc948"/><path d="M62 77h36" stroke="#38231c" strokeWidth="2"/><text x="80" y="91" textAnchor="middle" fill="#38231c" fontSize="8" fontFamily="monospace" letterSpacing="2">SALSA</text></svg>;
-}
-
-function SeasoningIllustration() {
-  return <svg viewBox="0 0 160 190" fill="none" aria-hidden="true"><path d="M44 56h72l-6 112c-.5 9-7 14-15 14H65c-8 0-14-5-15-14L44 56Z" fill="#d9bd7e" stroke="#38231c" strokeWidth="3"/><path d="M39 48c0-5 4-9 9-9h64c5 0 9 4 9 9v14H39V48Z" fill="#a6402d" stroke="#38231c" strokeWidth="3"/><path d="M56 85h48v54H56z" fill="#f4e4b5" stroke="#38231c" strokeWidth="2"/><path d="M63 98h34m-34 8h34m-34 8h22" stroke="#48623a" strokeWidth="2"/><path d="m75 124 5-10 5 10-5 4-5-4Z" fill="#a6402d"/><text x="80" y="95" textAnchor="middle" fill="#38231c" fontSize="7" fontFamily="monospace" letterSpacing="1">JULIO'S</text></svg>;
-}
-
 function GarageIllustration() {
   return <svg className="garage-illustration" viewBox="0 0 440 350" fill="none" aria-hidden="true">
     <path d="M41 283h357" stroke="#38231c" strokeWidth="3"/>
@@ -377,14 +328,9 @@ function RoutedErrorBoundary({ children }: { children: ReactNode }) {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+      <Router />
+    </WouterRouter>
   );
 }
 
