@@ -1,4 +1,4 @@
-import { type FormEvent, type ReactNode, useEffect, useState } from 'react';
+import { type ChangeEvent, type FormEvent, type ReactNode, useEffect, useState } from 'react';
 import { ErrorBoundary } from '@/components/error-boundary';
 import NotFound from '@/pages/not-found';
 import { ArrowDown, ArrowRight, ArrowUpRight, Flame, Leaf, Mail, MapPin, Menu, Phone, Search, Sparkles, X } from 'lucide-react';
@@ -303,6 +303,46 @@ function WhereToBuy() {
 }
 
 function Contact() {
+  const [form, setForm] = useState({
+    firstName: '',
+    lastName: '',
+    address: '',
+    city: '',
+    state: '',
+    phone: '',
+    email: '',
+    contactBy: '',
+    reason: '',
+  });
+  const [ready, setReady] = useState(false);
+
+  function update(field: keyof typeof form) {
+    return (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      setForm((current) => ({ ...current, [field]: event.target.value }));
+      setReady(false);
+    };
+  }
+
+  function sendNote(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const name = `${form.firstName.trim()} ${form.lastName.trim()}`;
+    const body = [
+      `Name: ${name}`,
+      `Address: ${form.address.trim()}`,
+      `City: ${form.city.trim()}`,
+      `State: ${form.state.trim()}`,
+      `Phone: ${form.phone.trim()}`,
+      `Email: ${form.email.trim()}`,
+      `Form of contact: ${form.contactBy}`,
+      '',
+      'Reason for contact:',
+      form.reason.trim(),
+    ].join('\n');
+    const subject = encodeURIComponent(`Julio’s note from ${name}`);
+    window.location.href = `mailto:sqfpractitioner@julioscornchips.com?subject=${subject}&body=${encodeURIComponent(body)}`;
+    setReady(true);
+  }
+
   useEffect(() => {
     const previousTitle = document.title;
     const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
@@ -348,8 +388,61 @@ function Contact() {
             <div className="availability-card">
               <div className="availability-label"><span className="availability-dot" /> The Julio’s family</div>
               <h2 id="contact-heading">Questions, special requests, or a hello are all welcome.</h2>
-              <p>Reach us by phone or email. We’ll be glad to talk it through.</p>
-              <div className="availability-rule"><span>How to reach us</span></div>
+              <p>Tell us a little about yourself and why you’re writing. Sending opens an email to the Julio’s family with your note ready to go.</p>
+              <div className="availability-rule"><span>Your note</span></div>
+              <form className="contact-form" onSubmit={sendNote}>
+                <div className="contact-form-row">
+                  <div className="contact-field">
+                    <label htmlFor="first-name">First name</label>
+                    <input id="first-name" name="firstName" autoComplete="given-name" required maxLength={80} value={form.firstName} onChange={update('firstName')} />
+                  </div>
+                  <div className="contact-field">
+                    <label htmlFor="last-name">Last name</label>
+                    <input id="last-name" name="lastName" autoComplete="family-name" required maxLength={80} value={form.lastName} onChange={update('lastName')} />
+                  </div>
+                </div>
+                <div className="contact-field">
+                  <label htmlFor="address">Address</label>
+                  <input id="address" name="address" autoComplete="street-address" required maxLength={160} value={form.address} onChange={update('address')} />
+                </div>
+                <div className="contact-form-row">
+                  <div className="contact-field">
+                    <label htmlFor="city">City</label>
+                    <input id="city" name="city" autoComplete="address-level2" required maxLength={80} value={form.city} onChange={update('city')} />
+                  </div>
+                  <div className="contact-field">
+                    <label htmlFor="state">State</label>
+                    <input id="state" name="state" autoComplete="address-level1" required maxLength={40} value={form.state} onChange={update('state')} />
+                  </div>
+                </div>
+                <div className="contact-form-row">
+                  <div className="contact-field">
+                    <label htmlFor="phone">Phone</label>
+                    <input id="phone" name="phone" type="tel" autoComplete="tel" required maxLength={30} value={form.phone} onChange={update('phone')} />
+                  </div>
+                  <div className="contact-field">
+                    <label htmlFor="email">Email</label>
+                    <input id="email" name="email" type="email" autoComplete="email" required maxLength={120} value={form.email} onChange={update('email')} />
+                  </div>
+                </div>
+                <div className="contact-field">
+                  <label htmlFor="contact-by">Form of contact</label>
+                  <select id="contact-by" name="contactBy" required value={form.contactBy} onChange={update('contactBy')}>
+                    <option value="" disabled>Choose one</option>
+                    <option>Phone</option>
+                    <option>Email</option>
+                  </select>
+                </div>
+                <div className="contact-field">
+                  <label htmlFor="reason">Reason for contact</label>
+                  <textarea id="reason" name="reason" required maxLength={2000} rows={5} value={form.reason} onChange={update('reason')} />
+                </div>
+                <button className="button button-dark" type="submit">Send</button>
+                {ready && (
+                  <p className="form-note" role="status">Your email app should open with this note addressed to the Julio’s family. Send it from there and they’ll get it.</p>
+                )}
+              </form>
+              <div className="availability-rule"><span>Or reach us directly</span></div>
               <a className="contact-detail" href="tel:18443518805"><span>Give us a call<strong>1-844-351-8805</strong></span><Phone /></a>
               <a className="contact-detail" href="mailto:sqfpractitioner@julioscornchips.com"><span>Send us a note<strong>sqfpractitioner@julioscornchips.com</strong></span><Mail /></a>
             </div>
