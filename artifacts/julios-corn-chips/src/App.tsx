@@ -19,10 +19,6 @@ function PoweredBy() {
       <a href="https://www.cowboynerds.com" target="_blank" rel="noreferrer">
         Cowboys Nerds
       </a>
-      {' · '}
-      <a href="https://www.cowboynerds.com" target="_blank" rel="noreferrer">
-        www.cowboynerds.com
-      </a>
     </p>
   );
 }
