@@ -203,6 +203,9 @@ body { margin:0; background:#f5f0d8; color:#38231c; font-family:var(--app-font-s
 .footer-links { display:flex;gap:22px; }
 .footer-links a { color:#f5f0d8;text-decoration:none;font-size:12px; }
 .footer-links a:hover { color:#edc948; }
+.footer-credit { max-width:1180px; margin:22px auto 0; padding-top:16px; border-top:1px solid #f5f0d82e; text-align:center; font:11px 'DM Mono',monospace; letter-spacing:.08em; color:#c4b9a2; }
+.footer-credit a { color:#edc948; text-decoration:none; }
+.footer-credit a:hover { color:#fff4d4; }
 .reveal { animation:rise .75s both; }
 @keyframes rise { from {opacity:0;transform:translateY(18px)} to {opacity:1;transform:translateY(0)} }
 @keyframes float { 0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(1deg)} }

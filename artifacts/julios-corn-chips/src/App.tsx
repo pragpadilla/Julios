@@ -12,6 +12,21 @@ import {
 
 const img = (name: string) => `${import.meta.env.BASE_URL}images/${name}`;
 
+function PoweredBy() {
+  return (
+    <p className="footer-credit">
+      Powered by{' '}
+      <a href="https://www.cowboynerds.com" target="_blank" rel="noreferrer">
+        Cowboys Nerds
+      </a>
+      {' · '}
+      <a href="https://www.cowboynerds.com" target="_blank" rel="noreferrer">
+        www.cowboynerds.com
+      </a>
+    </p>
+  );
+}
+
 function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
@@ -171,6 +186,7 @@ function Home() {
           <span className="footer-note">Family flavor since the very beginning.</span>
           <div className="footer-links"><a href="#favorites">The good stuff</a><a href="#story">Our story</a><Link href="/where-to-buy">Where to buy</Link><a href="#contact">Contact</a><a href="https://julioscornchips.com/shop/ols/products" target="_blank" rel="noreferrer">Shop <ArrowUpRight size={12} /></a></div>
         </div>
+        <PoweredBy />
       </footer>
     </div>
   );
@@ -280,6 +296,7 @@ function WhereToBuy() {
           <span className="footer-note">Family flavor since the very beginning.</span>
           <div className="footer-links"><Link href="/">Home</Link><a href="tel:18443518805">Call us</a><a href="mailto:sqfpractitioner@julioscornchips.com">Email</a><a href="https://julioscornchips.com/shop/ols/products" target="_blank" rel="noreferrer">Shop <ArrowUpRight size={12} /></a></div>
         </div>
+        <PoweredBy />
       </footer>
     </div>
   );
