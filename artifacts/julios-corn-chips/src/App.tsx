@@ -48,7 +48,7 @@ function Home() {
             <Link href="/where-to-buy" onClick={closeMenu}>Where to buy</Link>
             <a href="#contact" onClick={closeMenu}>Contact</a>
             <a className="nav-recipes" href="#ways" onClick={closeMenu}>Recipes</a>
-            <a className="nav-cta" href="https://julioscornchips.com/shop/ols/products" target="_blank" rel="noreferrer">Visit the shop <ArrowUpRight size={14} /></a>
+            <a className="nav-cta" href="https://julioscornchips.com/shop/ols/products" target="_blank" rel="noreferrer">Visit the shop</a>
           </div>
         </nav>
       </div>
@@ -85,7 +85,7 @@ function Home() {
           <div className="section-inner">
             <div className="products-heading">
               <div><div className="section-kicker">A little something for the table</div><h2 className="section-heading">The Julio’s trio.</h2><p className="section-lead">Three ways to bring a little more sabor to snack time, supper, and everything in between.</p></div>
-              <a className="text-link" href="https://julioscornchips.com/shop/ols/products" target="_blank" rel="noreferrer">Visit the shop <ArrowUpRight /></a>
+              <a className="text-link" href="https://julioscornchips.com/shop/ols/products" target="_blank" rel="noreferrer">Visit the shop</a>
             </div>
             <div className="product-grid">
               <a className="product-card chips has-photo" href="https://julioscornchips.com/shop/ols/products" target="_blank" rel="noreferrer" aria-label="Explore Julio's Tex-Mex seasoned corn chips">
@@ -175,7 +175,7 @@ function Home() {
             <div>
               <a className="contact-detail" href="tel:18443518805"><span>Give us a call<strong>1-844-351-8805</strong></span><Phone /></a>
               <a className="contact-detail" href="mailto:sqfpractitioner@julioscornchips.com"><span>Send us a note<strong>sqfpractitioner@julioscornchips.com</strong></span><Mail /></a>
-              <a className="contact-detail" href="https://julioscornchips.com/contact-us" target="_blank" rel="noreferrer"><span>Need another way?<strong>Visit our contact page</strong></span><ArrowUpRight /></a>
+              <Link className="contact-detail" href="/contact"><span>Need another way?<strong>Visit our contact page</strong></span><ArrowRight /></Link>
             </div>
           </div>
         </section>
@@ -302,6 +302,87 @@ function WhereToBuy() {
   );
 }
 
+function Contact() {
+  useEffect(() => {
+    const previousTitle = document.title;
+    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    const previousDescription = description?.content;
+    document.title = 'Contact Us | Julio’s Corn Chips';
+    if (description) {
+      description.content = 'Get in touch with Julio’s Corn Chips. Call 1-844-351-8805 or email sqfpractitioner@julioscornchips.com with questions or special requests.';
+    }
+
+    return () => {
+      document.title = previousTitle;
+      if (description && previousDescription !== undefined) {
+        description.content = previousDescription;
+      }
+    };
+  }, []);
+
+  return (
+    <div className="site-shell">
+      <div className="topline"><span className="dot" /> Family-made in Del Rio, Texas <span className="dot" /> A little crunch goes a long way</div>
+      <div className="nav-wrap">
+        <nav className="nav" aria-label="Main navigation">
+          <Link className="brand" href="/" aria-label="Julio's Corn Chips home">
+            <img className="brand-mark" src={img('bag-mark.png')} alt="" />
+            <span className="brand-name">Julio’s<small>Corn Chips · Del Rio, TX</small></span>
+          </Link>
+          <Link className="back-home" href="/">Back to the table <ArrowRight size={15} /></Link>
+        </nav>
+      </div>
+      <main className="where-page">
+        <section className="where-hero">
+          <img className="where-shelf" src={img('del-rio-river.jpg')} alt="A tree-lined river with a footbridge and small waterfalls in Del Rio" />
+          <div className="where-hero-inner">
+            <div className="where-copy">
+              <div className="eyebrow">Contact us</div>
+              <h1>Get in<br /><em>touch.</em></h1>
+              <p>We love to hear from our customers. Feel free to contact us with any questions or special requests.</p>
+            </div>
+          </div>
+        </section>
+        <section className="where-content" aria-labelledby="contact-heading">
+          <div className="where-content-inner">
+            <div className="availability-card">
+              <div className="availability-label"><span className="availability-dot" /> The Julio’s family</div>
+              <h2 id="contact-heading">Questions, special requests, or a hello are all welcome.</h2>
+              <p>Reach us by phone or email. We’ll be glad to talk it through.</p>
+              <div className="availability-rule"><span>How to reach us</span></div>
+              <a className="contact-detail" href="tel:18443518805"><span>Give us a call<strong>1-844-351-8805</strong></span><Phone /></a>
+              <a className="contact-detail" href="mailto:sqfpractitioner@julioscornchips.com"><span>Send us a note<strong>sqfpractitioner@julioscornchips.com</strong></span><Mail /></a>
+            </div>
+            <aside className="where-aside">
+              <span className="aside-index">Also on the official site</span>
+              <h3>Looking for a bag nearby?</h3>
+              <p>Ask where Julio’s is sold, or go straight to the online shop.</p>
+              <Link className="button button-red" href="/where-to-buy">Where to buy <ArrowRight size={16} /></Link>
+              <div className="aside-contact">
+                <span>A little more</span>
+                <a href="https://julioscornchips.com/shop/ols/products" target="_blank" rel="noreferrer">Visit the shop</a>
+                <a href="https://julioscornchips.com/privacy-policy" target="_blank" rel="noreferrer"><ArrowUpRight size={17} /> Privacy policy</a>
+              </div>
+            </aside>
+          </div>
+        </section>
+        <section className="where-footnote">
+          <div><span className="section-kicker">Julio’s Corn Chips</span><p>Copyright © 2025 Julios Corn Chips — All Rights Reserved.</p></div>
+          <Link className="text-link" href="/">Back to Julio’s <ArrowRight size={15} /></Link>
+        </section>
+      </main>
+      <footer className="footer">
+        <div className="footer-inner">
+          <Link className="brand" href="/"><img className="brand-mark" src={img('bag-mark.png')} alt="" /><span className="brand-name">Julio’s<small>Corn Chips · Del Rio, TX</small></span></Link>
+          <span className="footer-note">Family flavor since the very beginning.</span>
+          <div className="footer-links"><Link href="/">Home</Link><Link href="/where-to-buy">Where to buy</Link><a href="tel:18443518805">Call us</a><a href="mailto:sqfpractitioner@julioscornchips.com">Email</a><a href="https://julioscornchips.com/shop/ols/products" target="_blank" rel="noreferrer">Shop <ArrowUpRight size={12} /></a></div>
+        </div>
+        <PoweredBy />
+      </footer>
+    </div>
+  );
+}
+
 function GarageIllustration() {
   return <svg className="garage-illustration" viewBox="0 0 440 350" fill="none" aria-hidden="true">
     <path d="M41 283h357" stroke="#38231c" strokeWidth="3"/>
@@ -332,6 +413,7 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/where-to-buy" component={WhereToBuy} />
+        <Route path="/contact" component={Contact} />
         <Route component={NotFound} />
       </Switch>
     </RoutedErrorBoundary>
